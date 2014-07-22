@@ -1,0 +1,1 @@
+{include "member/common/header.tpl"}
