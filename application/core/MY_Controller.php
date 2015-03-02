@@ -91,6 +91,7 @@ class MY_Controller extends CI_Controller
         $this->page->canonical = NULL;
         $this->page->subCat = NULL;
         $this->page->breadcrumb = NULL;
+        $this->page->useFacncybox = FALSE;
         
         $this->page->seo = (object)NULL;
         $this->page->seo->title = NULL;
