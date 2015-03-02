@@ -1,25 +1,5 @@
     <!-- Header -->
     <div class="header">
-        <!-- Topbar -->
-        <div class="topbar">
-            <div class="container">
-                <!-- Topbar Navigation -->
-                <ul class="loginbar pull-right">
-                    <li class="{if $page->topNav == 'about'}active{/if}"><i class="fa fa-info-circle"></i> <a href="{$base_url}about">About</a></li>
-                    <li class="topbar-devider"></li>
-                    <li class="{if $page->topNav == 'contact'}active{/if}"><i class="fa fa-envelope-o"></i> <a href="{$base_url}contact">Contact</a></li>
-                    <li class="topbar-devider"></li>
-                    <li class="{if $page->topNav == 'help'}active{/if}"><i class="fa fa-question-circle"></i> <a href="{$base_url}help">Help</a></li>
-                    {if $is_logged_in == TRUE}
-                    <li class="topbar-devider"></li>
-                    <li class="{if $page->topNav == 'member'}active{/if}"><i class="fa fa-user"></i> <a href="{$base_url}myaccount">My<span class="hidden-xs"> Account</span></a></li>
-                    {/if}
-                </ul>
-                <!-- End Topbar Navigation -->
-            </div>
-        </div>
-        <!-- End Topbar -->
-
         <!-- Navbar -->
         <div class="navbar navbar-default" role="navigation">
             <div class="container">
@@ -30,12 +10,12 @@
                         <span class="fa fa-bars"></span>
                     </button>
                     <a class="navbar-brand" href="{$base_url}">
-                        <img id="logo-header" src="{$base_url}images/logo1-default.png" alt="Logo">
+                        <img id="logo-header" class="img-responsive" src="{$base_url}images/white-internet-head.png" alt="White Internet Logo" title="White Internet">
                     </a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse navbar-responsive-collapse  bs-js-navbar-collapse">
+                <div class="collapse navbar-collapse navbar-responsive-collapse">
                     <ul class="nav navbar-nav">
                         <!-- Iain -->
                         <li class="{if $page->cat == 'pp'}active {/if}dropdown">
@@ -45,6 +25,9 @@
                             <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
                                 <li><a href="{$base_url}iain-white/iain-white"><i class="fa fa-user"></i> About Iain White</a></li>
                                 <li><a href="{$base_url}iain-white/resume"><i class="fa fa-file-text-o"></i> Iain's CV / R&eacute;sum&eacute;</a></li>
+                                {if $page->isLooking == TRUE}
+                                <li><a href="{$base_url}iain-white/seeking-work"><i class="fa fa-bolt"></i> Seeking Work</a></li>
+                                {/if}
                                 <!-- Work Information -->
                                 <li class="dropdown-submenu">
                                     <a href="javascript:void(0);"><i class="fa fa-info"></i> Work Information</a>
@@ -67,6 +50,35 @@
                             </ul>
                         </li>
                         <!-- End Iain -->
+
+                        <!-- Project Management -->
+                        <li class="{if $page->cat == 'pm'}active {/if}dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                                Project Management
+                            </a>
+                             <ul class="dropdown-menu">
+                                <!-- Agile -->
+                                <li class="dropdown-submenu">
+                                    <a href="javascript:void(0);"><i class="fa fa-puzzle-piece"></i> Agile</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{$base_url}project-management/agile"><i class="fa fa-puzzle-piece"></i> Agile Development</a></li>
+                                        <li><a href="{$base_url}project-management/agile-manifesto"><i class="fa fa-puzzle-piece"></i> Agile Manifesto</a></li>
+                                        <li><a href="{$base_url}project-management/scrum"><i class="fa fa-puzzle-piece"></i> Scrum</a></li>
+                                        <li><a href="{$base_url}project-management/kanban"><i class="fa fa-puzzle-piece"></i> Kanban</a></li>
+                                        <li><a href="{$base_url}project-management/scrumban"><i class="fa fa-puzzle-piece"></i> Scrumbang</a></li>
+                                        <li><a href="{$base_url}project-management/extreme-programming"><i class="fa fa-puzzle-piece"></i> Extreme Programming</a></li>
+                                        <li><a href="{$base_url}project-management/lean"><i class="fa fa-puzzle-piece"></i> Lean Development</a></li>
+                                    </ul>
+                                </li>
+                                <!-- End Agile -->
+
+                                <li><a href="{$base_url}project-management/waterfall"><i class="fa fa-puzzle-piece"></i> Waterfall</a></li>
+                                <li><a href="{$base_url}project-management/prince2"><i class="fa fa-puzzle-piece"></i> Prince2</a></li>
+                                <li><a href="{$base_url}project-management/cmm"><i class="fa fa-puzzle-piece"></i> CMM</a></li>
+                                <li><a href="{$base_url}project-management"><i class="fa fa-plus pull-right"></i>More</a></li>
+                            </ul>
+                        </li>
+                        <!-- End Project Management -->
 
                         <!-- Web Development -->
                         <li class="{if $page->cat == 'wd'}active {/if}dropdown">
@@ -105,8 +117,8 @@
                                     <a href="javascript:void(0);"><i class="fa fa-html5"></i> Front-end</a>
                                     <ul class="dropdown-menu">
                                         <li><a href="{$base_url}web-development/html"><i class="fa fa-html5"></i> HTML</a></li>
-                                        <li><a href="{$base_url}web-development/css"><i class="fa fa-css3"></i>  CSS</a></li>
-                                        <li><a href="{$base_url}web-development/languages/javascript"><i class="fa fa-file-code-o"></i>  JavaScript</a></li>
+                                        <li><a href="{$base_url}web-development/css"><i class="fa fa-css3"></i> CSS</a></li>
+                                        <li><a href="{$base_url}web-development/languages/javascript"><i class="fa fa-file-code-o"></i> JavaScript</a></li>
                                         <li><a href="{$base_url}web-development/accessibility"><i class="fa fa-eye"></i> Accessibility</a></li>
                                         <li><a href="{$base_url}web-development/seo"><i class="fa fa-search"></i> SEO</a></li>
                                     </ul>
@@ -114,39 +126,10 @@
                                 <!-- End Front-end -->
 
                                 <li><a href="{$base_url}web-development/web-browsers"><i class="fa fa-globe"></i>Browsers</a></li>
-                                <li><a href="{$base_url}web-development"><i class="fa fa-plus"></i> More</a></li>
+                                <li><a href="{$base_url}web-development"><i class="fa fa-plus pull-right"></i>More</a></li>
                             </ul>
                         </li>
                         <!-- End Web Development -->
-
-                        <!-- Project Management -->
-                        <li class="{if $page->cat == 'pm'}active {/if}dropdown">
-                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                                Project Management
-                            </a>
-                             <ul class="dropdown-menu">
-                                <!-- Agile -->
-                                <li class="dropdown-submenu">
-                                    <a href="javascript:void(0);"><i class="fa fa-puzzle-piece"></i> Agile</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="{$base_url}project-management/agile"><i class="fa fa-puzzle-piece"></i> Agile Development</a></li>
-                                        <li><a href="{$base_url}project-management/agile-manifesto"><i class="fa fa-puzzle-piece"></i> Agile Manifesto</a></li>
-                                        <li><a href="{$base_url}project-management/scrum"><i class="fa fa-puzzle-piece"></i> Scrum</a></li>
-                                        <li><a href="{$base_url}project-management/kanban"><i class="fa fa-puzzle-piece"></i> Kanban</a></li>
-                                        <li><a href="{$base_url}project-management/scrumban"><i class="fa fa-puzzle-piece"></i> Scrumbang</a></li>
-                                        <li><a href="{$base_url}project-management/extreme-programming"><i class="fa fa-puzzle-piece"></i> Extreme Programming</a></li>
-                                        <li><a href="{$base_url}project-management/lean"><i class="fa fa-puzzle-piece"></i> Lean Development</a></li>
-                                    </ul>
-                                </li>
-                                <!-- End Agile -->
-
-                                <li><a href="{$base_url}project-management/waterfall"><i class="fa fa-puzzle-piece"></i> Waterfall</a></li>
-                                <li><a href="{$base_url}project-management/prince2"><i class="fa fa-puzzle-piece"></i> Prince2</a></li>
-                                <li><a href="{$base_url}project-management/cmm"><i class="fa fa-puzzle-piece"></i> CMM</a></li>
-                                <li><a href="{$base_url}project-management"><i class="fa fa-plus"></i> More</a></li>
-                            </ul>
-                        </li>
-                        <!-- End Project Management -->
 
                         <!-- IT -->
                         <li class="{if $page->cat == 'it'}active {/if}dropdown">
@@ -164,19 +147,37 @@
                                 <li><a href="{$base_url}it/books"><i class="fa fa-book"></i> Books</a></li>
                                 <li><a href="{$base_url}it/internet"><i class="fa fa-globe"></i> The Internet</a></li>
                                 <li><a href="{$base_url}it/definitions"><i class="fa fa-list"></i> Definitions</a></li>
-                                <li><a href="{$base_url}it"><i class="fa fa-plus"></i> More</a></li>
+                                <li><a href="{$base_url}it"><i class="fa fa-plus pull-right"></i>More</a></li>
                             </ul>
                         </li>
                         <!-- End IT -->
+
+                        <!-- White Internet -->
+                        <li class="{if $page->cat == ''}active {/if}dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                                White Internet
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{$base_url}about"><i class="fa fa-info-circle"></i> About</a></li>
+                                <li><a href="{$base_url}contact"><i class="fa fa-envelope-o"></i> Contact</a></li>
+                                {if $is_logged_in == TRUE}
+                                <li><a href="{$base_url}myaccount"><i class="fa fa-user"></i> My Account</a></li>
+                                {/if}
+                                <li><a href="{$base_url}sitemap"><i class="fa fa-sitemap"></i> Site Map</a></li>
+                                <li><a href="{$base_url}privacy-policy"><i class="fa fa-file-text-o"></i> Privacy Policy</a></li>
+                                <li><a href="{$base_url}terms-and-conditions"><i class="fa fa-file-o"></i> Terms &amp; Conditions</a></li>
+                            </ul>
+                        </li>
+                        <!-- White Internet -->
 
                         <!-- Search Block -->
                         <li>
                             <i class="search fa fa-search search-btn"></i>
                             <div class="search-open">
                                 <div class="input-group animated fadeInDown">
-                                    <input type="text" class="form-control" placeholder="Search">
+                                    <input type="text" class="form-control rounded-2x" placeholder="Search">
                                     <span class="input-group-btn">
-                                        <button class="btn-u" type="button">Find</button>
+                                        <button class="btn-u rounded-x" type="button">Go</button>
                                     </span>
                                 </div>
                             </div>

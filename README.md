@@ -1,2 +1,2 @@
 New White Internet Site
-Still testing Git
+Restarting Git

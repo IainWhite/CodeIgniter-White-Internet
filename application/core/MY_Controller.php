@@ -73,6 +73,7 @@ class MY_Controller extends CI_Controller
         
         // Page object
         $this->page = (object)NULL;
+        $this->page->title = '';
         $this->page->className = $class_name;
         $this->page->noindex = FALSE;
         $this->page->cat = NULL;
@@ -90,6 +91,15 @@ class MY_Controller extends CI_Controller
         $this->page->canonical = NULL;
         $this->page->subCat = NULL;
         $this->page->breadcrumb = NULL;
+        
+        $this->page->seo = (object)NULL;
+        $this->page->seo->title = NULL;
+        $this->page->seo->desc = NULL;
+        $this->page->seo->image = urlencode(base_url() . 'images/meta/white-internet-logo.png');
+        $this->page->seo->tags = urlencode('SEO-TAGS');
+        
+        $url = (!empty($_SERVER['HTTPS'])) ? "https://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'] : "http://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+        $this->page->url = urlencode($url);
         
         // Week switch
         $dayOfMonth = date('j');
@@ -120,8 +130,8 @@ class MY_Controller extends CI_Controller
     
     /**
      * Final view codes for showing template
-     * @param ArrayObject $data
      * @param bool $template_only
+     * @param ArrayObject $data
      */
     function view($template_only = FALSE, $param = NULL)
     {
@@ -168,7 +178,7 @@ class MY_Controller extends CI_Controller
                 preg_match("/<p>(.*)<\/p>/i", $tplOutput, $matches);
                 if (count($matches) == 0) return $tplOutput;
                 $description = strip_tags($matches[1]);
-                if (strlen($description) > 200) {
+                if (strlen($description) > 155) {
                     $description = substr($description, 0, strrpos(substr($description, 0, 200), ' '));
                     $description = substr($description, 0, strrpos(substr($description, 0, 200), '. ')) . '.';
                 }
@@ -176,14 +186,50 @@ class MY_Controller extends CI_Controller
             } else {
                 $description = $smarty->page->desc;
             }
+            // Meta Description
             $description = '<meta name="description" content="' . $description . '" />';
             $tplOutput = preg_replace('/<meta name="description" content=".*" \/>/i', '' . $description . '$1', $tplOutput, 1);
+            
+            // SEO Description
+            if (empty($smarty->page->seo->desc)) {
+                $smarty->page->seo->desc = $smarty->page->desc;
+            }
+                
+            //<meta itemprop="description" content="{$page->seo->desc}">
+            $description = '<meta itemprop="description" content="' . $smarty->page->seo->desc . '" />';
+            $tplOutput = preg_replace('/<meta itemprop="description" content=".*" \/>/i', '' . $description . '$1', $tplOutput, 1);
+            //<meta property="og:description" content="{$page->seo->desc}" />
+            $description = '<meta property="og:description" content="' . $smarty->page->seo->desc . '" />';
+            $tplOutput = preg_replace('/<meta property="og:description" content=".*" \/>/i', '' . $description . '$1', $tplOutput, 1);
+            //<meta name="twitter:description" content="{$page->seo->desc}" />
+            $description = '<meta name="twitter:description" content="' . $smarty->page->seo->desc . '" />';
+            $tplOutput = preg_replace('/<meta name="twitter:description" content=".*" \/>/i', '' . $description . '$1', $tplOutput, 1);
+    
+    
             $title = $smarty->page->title . ' | ' . get_domain();
             if (strlen($title) > 70) {
                 $title = preg_replace("/\([^)]+\)/","", $title);
             }
+            // Page Title
             $title = '<title>' . $title . '</title>';
             $tplOutput = preg_replace('/<title>.*<\/title>/i', '' . $title . '$1', $tplOutput, 1);
+            
+            // SEO Title
+            if (empty($smarty->page->seo->title)) {
+                $smarty->page->seo->title = $smarty->page->title;
+            }
+            if (empty($smarty->page->seo->title)) {
+                $this->config->item('default_seo_title');
+            }
+            $title = '<meta itemprop="name" content="' . $smarty->page->seo->title . '" />';
+            $tplOutput = preg_replace('/<meta itemprop="name" content=".*" \/>/i', '' . $title . '$1', $tplOutput, 1);
+            $title = '<meta property="og:title" content="' . $smarty->page->seo->title . '" />';
+            $tplOutput = preg_replace('/<meta property="og:title" content=".*" \/>/i', '' . $title . '$1', $tplOutput, 1);
+            $title = '<meta name="twitter:title" content="' . $smarty->page->seo->title . '" />';
+            $tplOutput = preg_replace('/<meta name="twitter:title" content=".*" \/>/i', '' . $title . '$1', $tplOutput, 1);
+            //@TODO: Linkin
+            
+            // Timestamp
             $dateTime = '<!-- ' . date('l dS \of F Y h:i:s A') . ' -->';
             $tplOutput = preg_replace('/(<\/body>)/i', '' . $dateTime . "\n" . '$1', $tplOutput, 1);
             return $tplOutput;

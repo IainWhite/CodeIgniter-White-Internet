@@ -15,7 +15,8 @@
 <div class="row">
     <div class="col-lg-12 col-md-12">
         <p>{'Windows Vista'|link_urls:'wiki'}</p>
-        {'Windows Vista desktop'|helper:'page':'getImage':'png':'centre':NULL:TRUE}
+        {'Windows Vista desktop'|helper:'page':'addImage':'jpg':'centre':TRUE:NULL:NULL}
+        {'Windows Vista desktop'|helper:'page':'addImage':'jpg':'centre':TRUE:NULL:TRUE}
     </div>
 </div>
 {/if}

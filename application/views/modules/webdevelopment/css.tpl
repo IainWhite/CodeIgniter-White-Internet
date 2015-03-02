@@ -53,4 +53,10 @@
         <p>This meant that already published standards like CSS 2.1, CSS 3 Selectors and CSS 3 Text were pulled back from Candidate Recommendation to Working Draft level.</p>
     </div>
 </div>
+ <div class="row">
+    <div class="col-lg-12 col-md-12">
+        <h2>CSS Tricks</h2>
+        {'http://feeds.feedburner.com/CssTricks'|helper:'page':'addRSS'}
+    </div>
+</div>  
 {/if}

@@ -172,25 +172,171 @@ function headline($title, $funcName, $pageTitle = NULL)
         $out .= '<a name="' . $template . '" ></a>';
     }
     if (!$smarty->page->sub) {
-        $titleIcon = '';
+        $titleClass = '';
         $subCat = $smarty->page->subCat;
         if ($subCat == 'people') {
-            $titleIcon = '<i class="fa fa-users"></i> ';
+            $titleClass = 'header-icon fa-users';
         }
         if ($subCat == 'companies') {
-            $titleIcon = '<i class="fa fa-building"></i> ';
+            $titleClass = 'header-icon fa-building';
         }
         if ($subCat == 'books') {
-            $titleIcon = '<i class="fa fa-book"></i> ';
+            $titleClass = 'header-icon fa-book';
         }
         if ($subCat == 'languages') {
-            $titleIcon = '<i class="fa fa-file-code-o"></i> ';
+            $titleClass = 'header-icon fa-file-code-o';
         }
+        //die($title);
+        switch ($title) {
+            case 'About White Internet':
+                $titleClass = 'header-icon fa-info-circle';
+                break;
+            case 'Contact':
+                $titleClass = 'header-icon fa-envelope-o';
+                break;
+            case 'Privacy Policy':
+                $titleClass = 'header-icon fa-file-text-o';
+                break;
+            case 'Web Site Terms and Conditions of Use':
+                $titleClass = 'header-icon fa-file-o';
+                break;
+            case 'Page Not Found':
+            case 'Page Not Found (404)':
+                $titleClass = 'header-icon fa-warning';
+                break;
+            case 'Search Results':
+                $titleClass = 'header-icon fa-search';
+                break;
+            case 'White Internet Site Map':
+                $titleClass = 'header-icon fa-sitemap';
+                break;
+            case 'Iain White':
+                $titleClass = 'header-icon fa-user';
+                break;
+            case 'Iain White\'s CV / Resume':
+                $titleClass = 'header-icon fa-file-text-o';
+                break;
+            case 'Seeking Work':
+                $titleClass = 'header-icon fa-bolt';
+                break;
+            case 'Work Information':
+                $titleClass = 'header-icon fa-info-circle';
+                break;
+            case 'Skills Matrix for Iain White':
+                $titleClass = 'header-icon fa-list-ul';
+                break;
+            case 'Programming Languages':
+                $titleClass = 'header-icon fa-file-code-o';
+                break;
+            case 'Computer Skills':
+                $titleClass = 'header-icon fa-laptop';
+                break;
+            case 'Examples of Work':
+                $titleClass = 'header-icon fa-image';
+                break;
+            case 'Case Studies':
+                $titleClass = 'header-icon fa-lightbulb-o';
+                break;
+            case 'Pragmatic Programmer':
+                $titleClass = 'header-icon fa-star';
+                break;
+            case 'Qualifications &amp; Training':
+                $titleClass = 'header-icon fa-graduation-cap';
+                break;
+            case 'Documents':
+                $titleClass = 'header-icon fa-file-o';
+                break;
+            case 'Press and Reviews about Iain White\'s work':
+                $titleClass = 'header-icon fa-quote-right';
+                break;
+            case 'Recommendations for Iain White\'s work':
+                $titleClass = 'header-icon fa-comment-o';
+                break;
+            case 'Project Management':
+                $titleClass = 'header-icon fa-puzzle-piece';
+                break;
+            case 'Web Development':
+                $titleClass = 'header-icon fa-globe';
+                break;
+            case 'Information Technology':
+                $titleClass = 'header-icon fa-desktop';
+                break;
+            case 'PHP':
+                $titleClass = 'header-icon fa-file-code-o';
+                break;
+            case 'HTML5':
+            case 'HTML 5':
+                $titleClass = 'header-icon fa-html5';
+                break;
+            case 'CSS-3':
+                $titleClass = 'header-icon fa-css3';
+                break;
+            case 'Wordpress':
+                $titleClass = 'header-icon fa-wordpress';
+                break;
+            case 'Drupal':
+                $titleClass = 'header-icon fa-drupal';
+                break;
+            case 'MySQL':
+            case 'MongoDB':
+            case 'MariaDB':
+            case 'PostgreSQL':
+            case 'SQLite':
+            case 'RDBMS':
+            case 'SQL':
+            case 'Microsoft SQL Server':
+            case 'T-SQL':
+                $titleClass = 'header-icon fa-database';
+                break;
+            case 'WiFi':
+                $titleClass = 'header-icon fa-wifi';
+                break;
+            case 'Git':
+                $titleClass = 'header-icon fa-code-fork';
+                break;
+            case 'Admin':
+                $titleClass = 'header-icon fa-dashboard';
+                break;
+            case 'Google Maps':
+                $titleClass = 'header-icon fa-map-marker';
+                break;
+            case 'Ecommerce':
+                $titleClass = 'header-icon fa-shopping-cart';
+                break;
+            case 'Bash':
+                $titleClass = 'header-icon fa-terminal';
+                break;
+            case 'PDF':
+                $titleClass = 'header-icon fa-file-pdf-o';
+                break;
+        }
+        if (!$titleClass) {
+            $cat = $smarty->page->cat;
+            switch ($cat) {
+                case 'pp':
+                    $titleClass = 'header-icon fa-user';
+                    break;
+                case 'wd':
+                    $titleClass = 'header-icon fa-globe';
+                    break;
+                case 'pm':
+                    $titleClass = 'header-icon fa-puzzle-piece';
+                    break;
+                case 'it':
+                    $titleClass = 'header-icon fa-desktop';
+                    break;
+                default:
+                    $titleClass = 'header-icon fa-paw';
+                    break;
+            }
+        }    
+        $titleClass .= ' pull-left';
         $out = '<div class="breadcrumbs">' . "\n";
         $out .= '    <div class="container">' . "\n";
-        $out .= '        <h1 class="pull-left">' . $titleIcon . $title . '</h1>' . "\n";
+        $out .= '        <h1 class="' . $titleClass . '">' . $title . '</h1>' . "\n";
         $out .= addBreadcrumb($smarty->page->cat);
         $smarty->page->title = $pageTitle;
+        $smarty->page->seo->title = urlencode($smarty->page->title);
         $smarty->page->curLeval = 2;
         $out .= '    </div>' . "\n";
         $out .= '</div>' . "\n";
@@ -795,13 +941,13 @@ function getHeadshot($name, $funcName, $imgSize = 's', $ext = 'jpg', $imgStyle =
     $imgClass .= ' ' . $imgStyle;
     switch ($imgStyle) {
         case 'left':
-            $imgClass .= ' pull-left img-thumbnail rounded-2x margin-right-10 box-shadow shadow-effect-1';
+            $imgClass .= ' pull-left img-thumbnail img-responsive rounded-2x margin-right-10 box-shadow shadow-effect-1';
             break;
         case 'right':
-            $imgClass .= '  pull-right img-thumbnail rounded-2x margin-left-10 box-shadow shadow-effect-1';
+            $imgClass .= '  pull-right img-thumbnail img-responsive rounded-2x margin-left-10 box-shadow shadow-effect-1';
             break;
         case 'centre':
-            $imgClass .= ' box-shadow shadow-effect-1 center-block img-thumbnail';
+            $imgClass .= ' box-shadow shadow-effect-1 img-responsive center-block img-thumbnail';
             break;
         case 'none':
             $imgClass .= '';
@@ -823,13 +969,13 @@ function getLogo($name, $funcName, $imgSize = 's', $ext = 'jpg', $imgStyle = 'le
     $imgClass .= ' ' . $imgStyle;
     switch ($imgStyle) {
         case 'left':
-            $imgClass .= ' pull-left margin-right-10 box-shadow shadow-effect-1 img-thumbnail';
+            $imgClass .= ' pull-left img-responsive margin-right-10 box-shadow shadow-effect-1 img-thumbnail';
             break;
         case 'right':
-            $imgClass .= ' pull-right margin-left-10 box-shadow shadow-effect-1 img-thumbnail';
+            $imgClass .= ' pull-right img-responsive margin-left-10 box-shadow shadow-effect-1 img-thumbnail';
             break;
         case 'centre':
-            $imgClass .= ' box-shadow shadow-effect-1 center-block img-thumbnail';
+            $imgClass .= ' box-shadow img-responsive shadow-effect-1 center-block img-thumbnail';
             break;
         case 'none':
             $imgClass .= '';
@@ -915,6 +1061,63 @@ function getImage($name, $funcName, $ext = 'jpg', $imgStyle = 'left', $title = N
     return $out;
 }
 
+function addImage($name, $funcName, $ext = 'jpg', $imgStyle = 'left', $zoom = FALSE, $title = NULL, $showTitle = FALSE)
+{
+    $filename = strtolower(preg_replace("/[\s_]/", '-', $name));
+    $file = '/images/' . $filename . '.' . $ext;
+    $imgClass = 'class="img-responsive rounded-2x center-block';
+    $containerClass = 'thumbnail box-shadow shadow-effect-1 rounded-2x col-xs-8 col-sm-2 col-md-2';
+    switch ($imgStyle) {
+        case 'left':
+            if (!$showTitle) {
+                $imgClass .= ' pull-left margin-right-10 box-shadow shadow-effect-1 img-thumbnail';
+            }
+            $containerClass .= ' pull-left margin-right-10';
+            break;
+        case 'right':
+            if (!$showTitle) {
+                $imgClass .= ' pull-right margin-left-10 box-shadow shadow-effect-1 img-thumbnail';
+            }
+            $containerClass .= ' pull-right margin-left-10';
+            break;
+        case 'centre':
+            if (!$showTitle && !$zoom) {
+                $imgClass .= ' box-shadow shadow-effect-1 center-block img-thumbnail';
+            }
+            $containerClass .= ' col-xs-offset-2 col-sm-offset-5 col-md-offset-5';
+            break;
+        case 'none':
+            $imgClass .= '';
+            break;
+    }
+    $imgClass .= '"';
+    if ($title) {
+        $name = $title;
+    }
+    $out = '<img src="' . $file . '" alt="' . $filename . '" title="' . $name . '" ' . $imgClass . '/>';
+    if ($zoom) {
+        $CI =& get_instance();
+        $smarty = $CI->mysmarty;
+        $smarty->page->useFacncybox = TRUE;
+        $zoomFile = '/images/full/' . $filename . '.' . $ext;
+        $out = '<a href="' . $zoomFile . '" title="' . $name . '" data-rel="fancybox-button" class="fancybox-button zoomer">';
+        $out .= '   <span class="overlay-zoom">';  
+        $out .= '       <img src="' . $file . '" alt="' . $filename . '" title="' . $name . '" ' . $imgClass . '/>';
+        $out .= '       <span class="zoom-icon rounded-2x"></span>';
+        $out .= '   </span>';                      
+        $out .= '</a>';
+    }
+    if ($showTitle) {
+       $out = '<div class="' . $containerClass . '">' . $out;
+       $out .= '<div class="caption"><p class="text-center">' . $name . '</p></div></div>';
+    } else {
+        if ($zoom) {
+            $out = '<div class="' . $containerClass . '">' . $out . '</div>'; 
+        }
+    }
+    return $out;
+}
+        
 function getDefinitions($cat)
 {
     $out = '';
@@ -1021,6 +1224,39 @@ function getZendVersion()
     return zend_version();
 }
 
+function getPostgreSQLVersion()
+{
+    return pg_version();
+}
+
+function getMySQLVersion()
+{
+    $CI =& get_instance();
+    $em = $CI->doctrine->em;
+    $sql = 'SELECT VERSION() AS version;';
+    $rs = $em->getConnection()->prepare($sql);
+    $rs->execute();
+    $rows = $rs->fetchAll();
+    foreach($rows as $row) {
+        $v = $row['version'];
+    }
+    return $v;
+}
+
+function getMySQLVersionName()
+{
+    $CI =& get_instance();
+    $em = $CI->doctrine->em;
+    $sql = 'SHOW VARIABLES LIKE "version_comment";';
+    $rs = $em->getConnection()->prepare($sql);
+    $rs->execute();
+    $rows = $rs->fetchAll();
+    foreach($rows as $row) {
+        $v = $row['Value'];
+    }
+    return $v;
+}
+
     function getSoundBites($limit)
     {
         $randomArray = array(
@@ -1089,45 +1325,181 @@ function getZendVersion()
         return $out;
     }
 
-    function getQuotes($limit)
+    
+    function addPDFLink($filename, $funcName, $text = NULL, $class = NULL, $title = NULL, $sizeInLink = TRUE, $suppressSize = FALSE, $suppressIcon = FALSE)
     {
-        $randomArray = array(
-            '<em>"Before software can be reusable it first has to be usable."</em> - Ralph Johnson',
-            '<em>"The first 90% of the code accounts for the first 90% of the development time. The remaining 10% of the code accounts for the other 90% of the development time."</em> - Tom Cargill',
-            '<em>"In order to understand recursion, one must first understand recursion."</em> - Author Unknown',
-            '<em>"Measuring programming progress by lines of code is like measuring aircraft building progress by weight."</em> - Bill Gates',
-            '<em>"There are 10 kinds of people in the world, those who can read binary and those who cannot."</em> - Author Unknown',
-            '<em>"The bearing of a child takes nine months, no matter how many women are assigned."</em> - {"The Mythical Man Month"|link_urls:"w"}',
-            '<em>"Walking on water and developing software from a specification are easy if both are frozen."</em> - Edward V. Berard',
-            '<em>"The three chief virtues of a programmer are: Laziness, Impatience and Hubris."</em> - {"Larry Wall"|link_urls:"/p"}',
-            '<em>"Real programmers can write assembly code in any language.  :-)."</em> - {"Larry Wall"|link_urls:"/p"}',
-            '<em>"I actually hate programming, but I love solving problems."</em> - {"Rasmus Lerdorf"|link_urls:"/p"}',
-            '<em>"In \'93 to \'94, every browser had its own flavor of {"HTML"|link_urls:"w"}. So it was very difficult to know what you could put in a Web page and reliably have most of your readership see it."</em> - {"Tim Berners-Lee"|link_urls:"/p"}',
-            '<em>"Brooks\'s Law: Adding manpower to a late software project makes it later."</em> - {"The Mythical Man Month"|link_urls:"w"}',
-            '<em>"When\'s the last time you used duct tape on a duct? ."</em> - {"Larry Wall"|link_urls:"/p"}',
-            '<em>"Web users ultimately want to get at data quickly and easily. They don\'t care as much about attractive sites and pretty design."</em> - {"Tim Berners-Lee"|link_urls:"/p"}',
-            '<em>"I did not develop the {"PHP"|link_urls:"w"} we know today. Dozens, if not hundreds of people, developed PHP. I was simply the first developer."</em> - {"Rasmus Lerdorf"|link_urls:"/p"}',
-            '<em>"Data is a precious thing and will last longer than the systems themselves."</em> - {"Tim Berners-Lee"|link_urls:"/p"}',
-            '<em>"You want it in one line? Does it have to fit in 80 columns?  :-)."</em> - {"Larry Wall"|link_urls:"/p"}',
-            '<em>"I really don\'t like programming. I built this tool to program less so that I could just reuse code."</em> - {"Rasmus Lerdorf"|link_urls:"/p"}',
-            '<em>"When it comes to professionalism, it makes sense to talk about being professional in IT. Standards are vital so that IT professionals can provide systems that last."</em> - {"Tim Berners-Lee"|link_urls:"/p"}',
-            '<em>"How does a project get to be a year late? ... One day at a time."</em> - {"The Mythical Man Month"|link_urls:"w"}'
-        );
-        if ($limit == 'all') {
-            $limit = count($randomArray);
+        $url = base_url() . 'pdf/' . $filename . '.pdf';
+        if (!$text) {
+            $text = $filename;
+        }
+        if (!$title) {
+            $title = $text;
+        }
+        if ($suppressSize) {
+            $sizeInLink = FALSE;
+        }
+        if (!$suppressIcon) {
+            $text .= ' <i class="fa fa-file-pdf-o"></i>';
+        }
+        $classStr = '';
+        if ($class) {
+            $classStr = ' class="' . $class . '"';
+        }
+        $out = '<a href="' . $url . '" title="' . $title . '"' . $classStr . '>';
+        $fileSizeStr = '';
+        if (!$suppressSize) {
+            $root = $_SERVER['DOCUMENT_ROOT'];
+            $bytes = filesize($root . '/www/pdf/' . $filename . '.pdf');
+            if ($bytes) {
+                if ($bytes >= 1073741824) {
+                  $fileSize = number_format(round($bytes / 1024 / 1024 / 1024, 1)) . 'GB';
+                } elseif ($bytes >= 1048576) {
+                    $fileSize = number_format(round($bytes / 1024 / 1024, 1)) . 'MB';
+                } elseif ($bytes >= 1024) {
+                    $fileSize = number_format(round($bytes / 1024, 1)) . 'KB';
+                } else {
+                    $fileSize = number_format($bytes) . ' bytes';
+                } 
+                $fileSizeStr = ' (' . $fileSize . ')';
+            }
+        }
+        if ($sizeInLink) {
+            $text .= $fileSizeStr;
+            $out .= $text . '</a>'; 
         } else {
-            shuffle($randomArray);
+            $out .= $text . '</a>' . $fileSizeStr;
+        }
+        return $out;
+    }
+    
+    function getWisdom()
+    {
+        $CI =& get_instance();
+        $em = $CI->doctrine->em;
+        $sql = 'SELECT quote, author, additional FROM wd_wisdom ORDER BY MD5(CONCAT(id , CURRENT_TIMESTAMP)) LIMIT 1;';
+        $rs = $em->getConnection()->prepare($sql);
+        $rs->execute();
+        $row = $rs->fetch();
+        $quote = $row['quote'];
+        $author = $row['author'];
+        $additional = $row['additional'];
+        $out = '<div class="speechbubble rounded-2x">' . "\n";
+        $out .= '   <p>' . $quote . '</p>' . "\n";
+        $out .= '</div>' . "\n";
+        $out .= '<p class="speechbubble-author">' . $author;
+        if ($additional) {
+            $out .= ', <span>' . $additional . '</span>';
+        }
+        $out .= '</p>' . "\n";
+        return $out;
+    }
+    
+    function getQualificationsCount($cat = 'ALL')
+    {
+        if (!$cat) $cat = 'ALL';
+        $CI =& get_instance();
+        $em = $CI->doctrine->em;        
+        $qb = $em->createQueryBuilder();
+        $qb->from("WdCourse", "c")
+            ->select("count(c)");
+        if ($cat !== 'ALL') {
+            $qb->where('c.institute = :cat')
+                ->setParameter(':cat', $cat);
+        }
+        $query = $qb->getQuery();
+        return $query->getSingleScalarResult(); 
+    }
+
+    function getAbout($cat = 'ALL', $funcName, $limit = 0, $wraper = 'li', $modify = FALSE)
+    {
+        if (!$cat) $cat = 'ALL';
+        $CI =& get_instance();
+        $em = $CI->doctrine->em;        
+        $qb = $em->createQueryBuilder();   
+        $qb->select("a")
+            ->from("WdAbout","a");
+        // @TODO ORDER BY MD5(CONCAT(id , CURRENT_TIMESTAMP))
+        if ($cat !== 'ALL') {
+            $qb->where('a.cat = :cat')
+                ->setParameter(':cat', $cat);
+        }
+        if ($limit !== 0) {
+            $qb->setMaxResults($limit);
+        }
+        $query = $qb->getQuery();
+        //die(var_dump($query->getSQL()));
+        $facts = $query->getResult();
+        if ($wraper == 'Li') {
+            $openTag = '<li>';
+            $endTag = '</li>';
+        } else {
+            $openTag = '<p>';
+            $endTag = '</p>';
         }
         $out = '';
-        for ($i = 0; $i < $limit; $i++) {
-            $out .= '<p>' . $randomArray[$i] . '</p>';
+        for ($i = 0; $i < count($facts); $i++) {
+            $fact = $facts[$i];
+            $desc = $fact->geDesc();
+            if ($modify) {
+                preg_replace('/^I have/i', 'Iain White has', $desc);
+                preg_replace('/^I am/i', 'Iain White is', $desc);
+            }
+            $out .= $openTag . $desc . $endTag . "\n";
         }
-        $CI =& get_instance();
         $smarty = $CI->mysmarty;
         $out = $smarty->fetch('string:' . $out);
         return $out;
     }
 
+    function getQualifications($cat = 'ALL', $funcName, $limit = 0)
+    {
+        if (!$cat) $cat = 'ALL';
+        if (!$limit) $limit = 0;
+        $CI =& get_instance();
+        $em = $CI->doctrine->em;        
+        $qb = $em->createQueryBuilder();   
+        $qb->select("c")
+            ->from("WdCourse","c")
+            ->addOrderBy('c.when', 'DESC')
+            ->addOrderBy('c.id', 'DESC');
+        if ($cat !== 'ALL') {
+            $qb->where('c.institute = :cat')
+                ->setParameter(':cat', $cat);
+        }
+        if ($limit !== 0) {
+            $qb->setMaxResults($limit);
+        }
+        $query = $qb->getQuery();
+        //die(var_dump($query->getSQL()));
+        $courses = $query->getResult();
+        $out = '';
+        for ($i = 0; $i < count($courses); $i++) {
+            $course = $courses[$i];
+            $out .= '   <tr>' .  "\n";
+            $out .= '       <td class="clickable row-toggle collapsed" data-toggle="collapse" id="row' . $i . '" data-target=".row' . $i . '"><strong class="color-site-blue">' . $course->getTitle() . '</strong></td>' . "\n";
+            $out .= '       <td>' . $course->getLecturer() . '</td>' . "\n";
+            $out .= '       <td>{"' . $course->getInstitute() . '"|link_urls:"/c"}</td>' . "\n";
+            $out .= '       <td class="text-right">' . $course->getWhen() . '</td>' . "\n";
+            $out .= '   </tr>' .  "\n";
+            $out .= '   <tr class="collapse row' . $i . '">' .  "\n";
+            $out .= '       <td colspan="4">' . $course->getDesc() . '</td>' . "\n";
+            $out .= '   </tr>' .  "\n";
+        }
+        if ($out) {
+            $wrapper = '<table class="table table-hover table-striped table-curved shadow-effect-1">' . "\n";
+            $wrapper .= '    <tr>' . "\n";
+            $wrapper .= '        <th>Subject</th>' . "\n";
+            $wrapper .= '        <th>Lecture</th>' . "\n";
+            $wrapper .= '        <th>Institution</th>' . "\n";
+            $wrapper .= '        <th>Date</th>' . "\n";
+            $wrapper .= '    </tr>' . "\n";
+            $out = $wrapper . $out . "</table>\n";
+        }
+        $smarty = $CI->mysmarty;
+        $out = $smarty->fetch('string:' . $out);
+        return $out;
+    }        
+            
     function getPragmaticTips($limit)
     {
         $randomArray = array(
@@ -1352,6 +1724,7 @@ function getZendVersion()
 	$out .= adminValueSet('curLeval', $smarty->page->curLeval);
         $out .= adminValueSet('isLooking', $smarty->page->isLooking);
         $out .= adminValueSet('hasCode', $smarty->page->hasCode);
+        $out .= adminValueSet('useFacncybox', $smarty->page->useFacncybox); 
         $out .= adminValueSet('useJQueryUI', $smarty->page->useJQueryUI);
         $out .= adminValueSet('useMore', $smarty->page->useMore);
         $out .= adminValueSet('noindex', $smarty->page->noindex);
@@ -1382,6 +1755,28 @@ function getZendVersion()
             for ($i = 0; $i < count($additionalCss); $i++) {
                 $out .= $smarty->page->additionalCss[$i] . ', ';
             }
+        }
+        return $out;
+    }
+    
+    function addRSS($feed, $num = 5, $cache = 30)
+    {
+        $CI =& get_instance();
+        $smarty = $CI->mysmarty;
+        $out = '';
+
+        $CI->load->library('rssparser');
+
+        // Get 6 items from arstechnica
+        $rss = $CI->rssparser->set_feed_url($feed)->set_cache_life($cache)->getFeed($num);
+        foreach ($rss as $item)
+        {
+            $out .= '<div class="col-lg-12 col-md-12"><h3><a href="' . $item['link'] . '">' . $item['title'] . "</a></h3>";
+            $date = new DateTime($item['pubDate']);
+            $dateStr = $date->format('D d-m-Y \a\t H:i');
+            $out .= '<p>by <strong>' . $item['author'] . '</strong> on ' . $dateStr . '</p>';
+            $out .= $item['description'];
+            $out .= '</div>';
         }
         return $out;
     }

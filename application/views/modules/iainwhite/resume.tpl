@@ -1,5 +1,5 @@
 {{$smarty.template}|helper:'page':'registerTemplate':'pp'}
-{"Iain White's Resume"|helper:'page':'headline'}
+{"Iain White's CV / Resume"|helper:'page':'headline'}
 <div class="row">
     <div class="col-lg-12 col-md-12">
         {$page->headline}

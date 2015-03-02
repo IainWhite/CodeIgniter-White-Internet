@@ -90,7 +90,13 @@ function smarty_modifier_link_urls($page, $cat = NULL, $hash = NULL, $title = NU
         $cat = base_url() . $catURL . '/languages';
     }
     // Fix some commen pages
-    switch (strtolower($page)) { 
+    switch (strtolower($page)) {
+        case 'Joomla!':
+        case 'joomla!':
+        case 'joomla-':
+            $title = 'Joomla!';
+            $page = 'joomla';
+            break;
         case 'c++':
         case 'c-plus-plus':
         case 'c plus plus':
@@ -284,7 +290,7 @@ function smarty_modifier_link_urls($page, $cat = NULL, $hash = NULL, $title = NU
         $url .= '#' . preg_replace("/[^a-z0-9]+/i", '-', $hash);
         $title = $hash;
     }
-    $link = '<a href="' . strtolower($url) . '" title="' . $title . '" rel="' . $rel . '">' . $title . '</a>';
+    $link = '<a href="' . strtolower($url) . '" title="' . $title . '">' . $title . '</a>';
 
     return $link;
 } 

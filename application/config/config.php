@@ -1,7 +1,10 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 $config['maintenance_mode'] = FALSE;
-$config['is_looking'] = FALSE;
+$config['is_looking'] = TRUE;
+$config['default_seo_title'] = 'White Internet';
+$config['default_seo_desc'] = 'This site contains facts and information about Project Management, Web Development and Information Technology.';
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +20,7 @@ $config['is_looking'] = FALSE;
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://iain-white.com';
+$config['base_url']	= 'http://new.whiteinternet.com';
 
 /*
 |--------------------------------------------------------------------------
