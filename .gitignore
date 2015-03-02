@@ -9,9 +9,7 @@ ehthumbs.db
 .DS_Store
 .AppleDouble
 .LSOverride
-/nbproject/private/
-/application/cache/
-/application/logs/
 /application/models/proxies/
 /nbproject/
-/like-fb/nbproject/private/
+.idea/
+*.iml
