@@ -16,7 +16,7 @@
     <div class="col-lg-12 col-md-12">
     <p>Stackdriver's features include:</p>
     <ul>
-        <li>Compatible with {'AWS'|link_urls:'i'} and Rackspace</li>
+        <li>Compatible with {'AWS'|link_urls:'i'} and {'Rackspace'|link_urls:'i'}</li>
         <li>Supporting application, system and infrastructure level metrics ('<strong>Full Stack Monitoring</strong>')</li>
         <li>Interactive colored graphs and charts of data</li>
         <li>Create and customize groups and dashboards</li>
